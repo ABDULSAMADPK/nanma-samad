@@ -1,0 +1,4 @@
+git add .
+git commit -m "commit msg"
+git push origin samad
+git pull origin master
