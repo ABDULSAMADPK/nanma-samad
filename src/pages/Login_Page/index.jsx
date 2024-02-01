@@ -33,7 +33,7 @@ function LogInPage() {
                         </div>
                         <div className='relative'>
                             <label className='text-black-600 text-sm font-bold' htmlFor="">Password</label>
-                            <Input type='password' value={password} onChange={handlePassword} placeholder='********' />
+                            <Input type='password' value={password} onChange={handlePassword} placeholder='Password' required/>
                             <RiEyeCloseLine className="absolute h-6 w-7 top-9 inset-y-0 right-1 pr-3 flex items-center cursor-pointer" />
                         </div>
                         <div className=''>
