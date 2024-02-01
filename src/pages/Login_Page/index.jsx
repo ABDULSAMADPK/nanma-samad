@@ -18,7 +18,7 @@ function LogInPage() {
     return (
         <div className='bg-black'>
             <div className='box min-h-screen flex items-center justify-center'>
-                <div className='box-item border pb-12 pt-4 bg-white rounded-2xl'>
+                <div className='box-item border pb-4 pt-4 bg-white rounded-2xl'>
                     <div className='relative'>
                         <RiCloseCircleLine className="absolute right-2 mr-4 text-3xl cursor-pointer" />
                     </div>
