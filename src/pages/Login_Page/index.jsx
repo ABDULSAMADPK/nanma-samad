@@ -3,22 +3,32 @@ import Input from '../../components/UI/Input'
 import Button from '../../components/UI/Button'
 import { RiCloseCircleLine } from "react-icons/ri";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-
 import './styles/login.css'
 import { Link } from 'react-router-dom';
+import Validation from '../../utils/validators/Validation';
 
 function LogInPage() {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [inputs, setInputs] = useState({
+        email:'',
+        password:''
+    })
+    const [errors, setErrors] = useState({})
 
     const [visible, setVisible] = useState(true)
 
+
+
+    const handleChange = (event) => {
+        const { name, value } = event.target
+        setInputs({ ...inputs, [name]: value })
+      }
+
     const handleSubmit = (event)=>{
         event.preventDefault()
-        console.log('samad');
+        setErrors(Validation(inputs))
     }
 
-    const className = 'bg-stone-200 rounded-md focus:outline-none py-2 px-3 mb-3 mt-1 w-full'
+    const className = 'bg-stone-200 rounded-md focus:outline-none py-2 px-3 mt-1 w-full'
 
     return (
         <div className='bg-black'>
@@ -33,13 +43,15 @@ function LogInPage() {
                     </div>
                     <form className='input-field my-12 mx-auto w-[80%]' onSubmit={handleSubmit}>
                         <div className=''>
-                            <label className='text-black text-sm font-bold' htmlFor="">Email ID/Mobile Number</label>
-                            <Input className={className} errorMessage='' type='text' value={username} setValue={setUsername} placeholder='Mobile Number' />
+                            <label className='text-black text-sm font-bold' htmlFor="">Email ID</label>
+                            <Input className={className} name='email' type='email' value={inputs.email} onChange={handleChange} placeholder='Enter your email Id' />
+                            {errors.email && <span>{errors.email}</span>}
                         </div>
-                        <div className='relative'>
+                        <div className='relative mt-3'>
                             <label className='text-black text-sm font-bold' htmlFor="">Password</label>
-                            <Input className={className} errorMessage='' type={visible ? 'password' : 'text'} value={password} setValue={setPassword} placeholder='Password' />
-                            {visible ? <AiOutlineEyeInvisible onClick={() => { setVisible(!visible) }} className='absolute right-2 top-9  h-6 w-6 pr-2 cursor-pointer' /> : <AiOutlineEye onClick={() => { setVisible(!visible) }} className='absolute right-2 top-9  h-6 w-6 pr-2 cursor-pointer' />}
+                            <Input className={className} name='password' type={visible ? 'password' : 'text'} value={inputs.password} onChange={handleChange} placeholder='Password' />
+                            {visible ? <AiOutlineEyeInvisible onClick={() => { setVisible(!visible) }} className='absolute right-2 top-9 h-6 w-6 pr-2 cursor-pointer' /> : <AiOutlineEye onClick={() => { setVisible(!visible) }} className='absolute right-2 top-9  h-6 w-6 pr-2 cursor-pointer' />}
+                            {errors.password && <span>{errors.password}</span>}
                         </div>
                         <div className=''>
                             <Button label='Login' />
