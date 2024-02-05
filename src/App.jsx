@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import LogInPage from './pages/Login_Page'
 import routes from './constants/routes'
 import SignUpPage from './pages/SignUp_Page'
+import HomePage from './pages/Home__Page'
 
 const App = () => {
   return (

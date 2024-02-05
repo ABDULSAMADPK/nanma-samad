@@ -1,5 +1,9 @@
-@media (max-width: 500px){
-    .box{
+span{
+    @apply text-red-600 text-sm
+}
+
+@media (max-width: 500px) {
+    .box {
         @apply w-[90%] mx-auto
     }
 }
