@@ -1,5 +1,5 @@
 import React from 'react'
-import useGetRequest from '../../utils/api/useGetRequest'
+import useGetRequest from '../../hook/api/useGetRequest'
 
 function HomePage() {
 

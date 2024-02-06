@@ -8,7 +8,7 @@ function useGetRequest(url) {
   useEffect(() => {
     fetch(url)
     .then(response=>response.json())
-    .then(result=>setData(result.slice(0,5)))
+    .then(result=>setData(result))
     .catch(error=>setError(error))
       setTimeout(() => {
         setLoading(false)
