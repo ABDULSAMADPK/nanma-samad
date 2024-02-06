@@ -39,7 +39,7 @@ function Validation(inputs) {
 
     if (inputs.confirmpassword === '') {
         errors.confirmpassword = 'Confirm Password is required'
-    } else if (inputs.confirmpassword && inputs.password !== inputs.confirmpassword) {
+    } else if (inputs.password !== inputs.confirmpassword) {
         errors.confirmpassword = 'Password is not matching'
     }
  

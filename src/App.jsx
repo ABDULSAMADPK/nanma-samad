@@ -12,6 +12,7 @@ const App = () => {
         <Routes>
           <Route path={routes.logIn()} element={<LogInPage/>}/>
           <Route path={routes.signUp()} element={<SignUpPage/>}/>
+          <Route path={routes.home()} element={<HomePage/>}/>
         </Routes>
       </Router>
     </div>

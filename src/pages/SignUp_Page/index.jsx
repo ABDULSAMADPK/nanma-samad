@@ -3,7 +3,7 @@ import Input from '../../components/UI/Input'
 import Button from '../../components/UI/Button'
 import { RiCloseCircleLine } from 'react-icons/ri'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './styles/signup.css'
 import Validation from '../../utils/validators/Validation';
 
