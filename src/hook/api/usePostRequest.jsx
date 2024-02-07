@@ -9,8 +9,7 @@ function usePostRequest(url) {
     const postData = async (inputs) => {
         try {
             const response = await axios.post(url,inputs)
-            const result = await response.data
-            setData(console.log(result))
+            setData(console.log(response.data))
         } catch (error){
             setError(error)
         }

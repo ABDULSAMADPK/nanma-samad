@@ -33,13 +33,13 @@ function LogInPage() {
         event.preventDefault()
         setErrors(Validation(inputs))
         postData(inputs)
-        if (data.user.email === inputs.email && data.user.password === inputs.password) {
-            alert('Login Successfull')
-            navigate('/')
-        } else {
-            alert('Invalid User Details!')
-        }
-
+        console.log(data);
+        // if (data.user.email === inputs.email && data.user.password === inputs.password) {
+        //     alert('Login Successfull')
+        //     navigate('/')
+        // } else {
+        //     alert('Invalid User Details!')
+        // }
     }
 
     if (postLoading) {
