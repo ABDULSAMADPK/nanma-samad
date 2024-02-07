@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 function ResetPasswordPage() {
 
     const [inputs, setInputs] = useState({
-        number: '',
+        phone: '',
         otp: '',
         resetpassword: '',
         confirmresetpassword: ''
@@ -19,15 +19,14 @@ function ResetPasswordPage() {
         setInputs({ ...inputs, [name]: value })
     }
 
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const [errors,setErrors] =useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(inputs);
         setErrors(Validation(inputs))
-        if(errors){
-            navigate('/')
+        if(Object.keys(errors).length===2){
+            navigate('/login')
         }
     }
 
@@ -46,11 +45,11 @@ function ResetPasswordPage() {
                     </div>
                     <form className='mx-auto w-[80%]' onSubmit={handleSubmit}>
                         <div className='mt-8'>
-                            <Input className={className} name='number' type='text' value={inputs.number} onChange={handleChange} placeholder='Mobile Number' />
-                            {errors.number && <span>{errors.number}</span>}
+                            <Input className={className} name='number' type='number' value={inputs.phone} onChange={handleChange} placeholder='Mobile Number' />
+                            {errors.phone && <span>{errors.phone}</span>}
                         </div>
                         <div className='flex justify-end'>
-                            <Button className='btn bg-blue-900 text-white my-3 text-lg py-2 px-4 rounded-xl' label='Get OTP' />
+                            <Button className='btn bg-blue-900 text-white my-3 text-lg py-2 px-4 rounded-xl disabled' label='Get OTP' />
                         </div>
                         <div className=''>
                             <Input className={className} name='otp' type='text' value={inputs.otp} onChange={handleChange} placeholder='Enter OTP' />

@@ -6,30 +6,37 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom'
 import './styles/signup.css'
 import Validation from '../../utils/validators/Validation';
+import usePostRequest from '../../hook/api/usePostRequest';
 
 function SignUpPage() {
 
-  const navigate = useNavigate()
 
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
-    number: '',
+    phone: '',
     password: '',
     confirmpassword: ''
   })
 
+  const apiurl = 'https://portal.umall.in/api/customer/register'
+
+  const { data, postData, loading: postLoading, error: postError } = usePostRequest(apiurl)
+
+  const navigate = useNavigate()
+
   const [errors, setErrors] = useState({})
-  
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(inputs);
     setErrors(Validation(inputs))
-    if(errors){
-      navigate('/')
+    postData(inputs)
+    console.log(data);
+    if (data.sts === '01') {
+      alert('Registration successfull')
+      navigate('/login')
     }
   }
-
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -39,8 +46,16 @@ function SignUpPage() {
   const [visible, setVisible] = useState(true)
   const [confirmVisible, setConfirmVisible] = useState(true)
 
-  const classNamebtn ='btn bg-blue-900 text-white mt-6 text-lg py-2 px-4 w-full rounded-3xl'
+  const classNamebtn = 'btn bg-blue-900 text-white mt-6 text-lg py-2 px-4 w-full rounded-3xl'
   const classNameinput = 'bg-stone-200 rounded-md focus:outline-none py-2 px-3 mt-1 w-full'
+
+  if (postLoading) {
+    <p className='flex items-center justify-center text-white text-xl'>Loading...</p>
+  }
+
+  if (postError) {
+    <p className='text-white text-xl'>Error: {postError}</p>
+  }
 
   return (
     <div className='bg-black py-10'>
@@ -68,8 +83,8 @@ function SignUpPage() {
             </div>
             <div className='mt-3'>
               <label className='text-black text-sm font-bold' htmlFor="">Mobile Number</label>
-              <Input className={classNameinput} type='text' placeholder='Mobile Number' name='number' value={inputs.number} onChange={handleChange} />
-              {errors.number && <span>{errors.number}</span>}
+              <Input className={classNameinput} type='number' placeholder='Mobile Number' name='phone' value={inputs.phone} onChange={handleChange} />
+              {errors.phone && <span>{errors.phone}</span>}
               {/* <span>Please enter a valid number</span> */}
             </div>
             <div className='relative mt-3'>
@@ -90,7 +105,7 @@ function SignUpPage() {
               <Button className={classNamebtn} label='Sign Up' />
             </div>
             <div className='text-center pt-4 pb-2'>
-              <p className=''>Already have an account? <Link to={'/'} className='text-blue-500'>Login</Link></p>
+              <p className=''>Already have an account? <Link to={'/login'} className='text-blue-500'>Login</Link></p>
             </div>
           </form>
         </div>

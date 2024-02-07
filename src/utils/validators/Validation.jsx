@@ -3,9 +3,9 @@ function Validation(inputs) {
 
     const errors = {}
 
-    const namePattern = /^[A-Za-z]{3,16}$/;
+    const namePattern = /^[A-Za-z]{3,20}$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     const numberPattern = /^[0-9]{10}$/;
     const otpPattern = /^[0-9]{4,6}$/;
 
@@ -23,11 +23,11 @@ function Validation(inputs) {
         errors.email = 'Please enter valid Email ID'
     }
 
-    if (inputs.number === '') {
-        errors.number = 'Enter your mobile number'
+    if (inputs.phone === '') {
+        errors.phone = 'Enter your mobile number'
     }
-    else if (!numberPattern.test(inputs.number)) {
-        errors.number = 'Please enter 10 digit Mobile Number'
+    else if (!numberPattern.test(inputs.phone)) {
+        errors.phone = 'Please enter 10 digit Mobile Number'
     }
 
     if (inputs.password === '') {
@@ -37,17 +37,18 @@ function Validation(inputs) {
         errors.password = 'Password must have minimum 8 characters, 1 symbol, 1 letter and 1 number'
     }
 
+    if (inputs.confirmpassword === '') {
+        errors.confirmpassword = 'Confirm Password is required'
+    } else if (inputs.password !== inputs.confirmpassword) {
+        errors.confirmpassword = 'Password is not matching'
+    }
+
     if (inputs.resetpassword === '') {
         errors.resetpassword = 'Enter your reset password'
     } else if (!passwordPattern.test(inputs.resetpassword)) {
         errors.resetpassword = 'Password must have minimum 8 characters, 1 symbol, 1 letter and 1 number'
     }
 
-    if (inputs.confirmpassword === '') {
-        errors.confirmpassword = 'Confirm Password is required'
-    } else if (inputs.password !== inputs.confirmpassword) {
-        errors.confirmpassword = 'Password is not matching'
-    }
     if (inputs.confirmresetpassword === '') {
         errors.confirmresetpassword = 'Confirm Password is required'
     } else if (inputs.resetpassword !== inputs.confirmresetpassword) {

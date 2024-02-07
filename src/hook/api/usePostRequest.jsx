@@ -1,21 +1,16 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 function usePostRequest(url) {
-    const [data, setData] = useState([]);
+    const [data,setData] =useState({})
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('')
 
     const postData = async (inputs) => {
         try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(inputs),
-            });
-            const result = await response.json();
-            setData(result);
+            const response = await axios.post(url,inputs)
+            const result = await response.data
+            setData(console.log(result))
         } catch (error){
             setError(error)
         }

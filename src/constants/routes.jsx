@@ -1,7 +1,7 @@
 
 const routes = {
-    home: () => '/home',
-    logIn: () => '/',
+    home: () => '/',
+    logIn: () => '/login',
     signUp:()=> '/signup',
     restPassword: ()=> '/resetpassword'
 }

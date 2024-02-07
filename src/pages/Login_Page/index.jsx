@@ -4,18 +4,25 @@ import Button from '../../components/UI/Button'
 import { RiCloseCircleLine } from "react-icons/ri";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import './styles/login.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Validation from '../../utils/validators/Validation';
+import usePostRequest from '../../hook/api/usePostRequest';
 
 function LogInPage() {
     const [inputs, setInputs] = useState({
         email: '',
         password: ''
     })
+
+    const navigate = useNavigate()
+
     const [errors, setErrors] = useState({})
 
     const [visible, setVisible] = useState(true)
 
+    const apiUrl = 'https://portal.umall.in/api/customer/login'
+
+    const { data, postData, loading: postLoading, error: postError } = usePostRequest(apiUrl)
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -25,6 +32,22 @@ function LogInPage() {
     const handleSubmit = (event) => {
         event.preventDefault()
         setErrors(Validation(inputs))
+        postData(inputs)
+        if (data.user.email === inputs.email && data.user.password === inputs.password) {
+            alert('Login Successfull')
+            navigate('/')
+        } else {
+            alert('Invalid User Details!')
+        }
+
+    }
+
+    if (postLoading) {
+        <p className='flex items-center justify-center'>Loading...</p>
+    }
+
+    if (postError) {
+        <p>Error: {postError}</p>
     }
 
     const classNamebtn = 'btn bg-blue-900 text-white mt-6 text-lg py-2 px-4 w-full rounded-3xl'
