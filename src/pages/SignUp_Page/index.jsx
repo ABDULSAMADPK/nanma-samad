@@ -7,9 +7,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import './styles/signup.css'
 import Validation from '../../utils/validators/Validation';
 import usePostRequest from '../../hook/api/usePostRequest';
+// import { routes } from '../../constants/routes'
 
 function SignUpPage() {
-
 
   const [inputs, setInputs] = useState({
     name: '',
@@ -19,23 +19,36 @@ function SignUpPage() {
     confirmpassword: ''
   })
 
-  const apiurl = 'https://portal.umall.in/api/customer/register'
-
-  const { data, postData, loading: postLoading, error: postError } = usePostRequest(apiurl)
-
+  const {
+    loading,
+    error: apiErrors,
+    postData,
+  } = usePostRequest({
+    url: "https://portal.umall.in/api/customer/register",
+    successCB: signUpSuccess
+  });
   const navigate = useNavigate()
 
   const [errors, setErrors] = useState({})
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     setErrors(Validation(inputs))
-    postData(inputs)
-    console.log(data);
-    if (data.sts === '01') {
-      alert('Registration successfull')
-      navigate('/login')
-    }
+      await postData({
+        body: {
+          name: inputs.name, email: inputs.email, password: inputs.password, phone: inputs.phone
+        },
+      });
+  }
+
+  function signUpSuccess({ data = {} }) {
+    const userId = data?.user?.id;
+    if (userId) {
+        console.log(userId, 'from signup form');
+        navigate('/login');
+    } else {
+        console.error('User ID not found in response data');
+    }  
   }
 
   const handleChange = (event) => {
@@ -49,12 +62,12 @@ function SignUpPage() {
   const classNamebtn = 'btn bg-blue-900 text-white mt-6 text-lg py-2 px-4 w-full rounded-3xl'
   const classNameinput = 'bg-stone-200 rounded-md focus:outline-none py-2 px-3 mt-1 w-full'
 
-  if (postLoading) {
+  if (loading) {
     <p className='flex items-center justify-center text-white text-xl'>Loading...</p>
   }
 
-  if (postError) {
-    <p className='text-white text-xl'>Error: {postError}</p>
+  if (apiErrors) {
+    <p className='text-white text-xl'>Error: {apiErrors}</p>
   }
 
   return (

@@ -5,7 +5,7 @@ function HomePage() {
 
   return (
     <div>
-        <Link className='text-3xl m-12' to={'/login'}>Login</Link>
+        <Link className='text-3xl m-12' to={'/signup'}>Sign Up</Link>
     </div>
   )
 }

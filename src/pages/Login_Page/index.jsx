@@ -20,26 +20,18 @@ function LogInPage() {
 
     const [visible, setVisible] = useState(true)
 
-    const apiUrl = 'https://portal.umall.in/api/customer/login'
 
-    const { data, postData, loading: postLoading, error: postError } = usePostRequest(apiUrl)
+    const {  postData, loading: postLoading, error: postError } = usePostRequest({url: "https://portal.umall.in/api/customer/login",successCB:loginSuccess})
 
     const handleChange = (event) => {
         const { name, value } = event.target
         setInputs({ ...inputs, [name]: value })
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         setErrors(Validation(inputs))
-        postData(inputs)
-        console.log(data);
-        // if (data.user.email === inputs.email && data.user.password === inputs.password) {
-        //     alert('Login Successfull')
-        //     navigate('/')
-        // } else {
-        //     alert('Invalid User Details!')
-        // }
+        await postData({body: {emailormobile:inputs.email,password:inputs.password}})
     }
 
     if (postLoading) {
@@ -49,6 +41,10 @@ function LogInPage() {
     if (postError) {
         <p>Error: {postError}</p>
     }
+    function loginSuccess({ data = { } }) {
+        console.log(data?.user,'from login form')
+        navigate('/')
+      }
 
     const classNamebtn = 'btn bg-blue-900 text-white mt-6 text-lg py-2 px-4 w-full rounded-3xl'
     const classNameinput = 'bg-stone-200 rounded-md focus:outline-none py-2 px-3 mt-1 w-full'
