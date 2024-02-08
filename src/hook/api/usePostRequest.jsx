@@ -12,7 +12,7 @@ function usePostRequest({url='',successCB = () => { }}) {
             const result = await response.data
             console.log(result)
             if(result.sts === '00'){
-                alert('error')
+                alert('Enter your correct details')
             }
             if(result.sts === '01'){
                 alert(result.msg)
