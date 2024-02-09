@@ -5,8 +5,10 @@ import { RiCloseCircleLine } from 'react-icons/ri'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom'
 import './styles/signup.css'
-import Validation from '../../utils/validators/Validation';
 import usePostRequest from '../../hook/api/usePostRequest';
+import EmailValidation from '../../utils/validators/EmailValidation';
+import NumberValidation from '../../utils/validators/NumberValidation';
+import PasswordValidation from '../../utils/validators/PasswordValidation';
 // import { routes } from '../../constants/routes'
 
 function SignUpPage() {
@@ -33,22 +35,50 @@ function SignUpPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setErrors(Validation(inputs))
+    const namePattern = /^[A-Za-z]{3,20}$/;
+    const errors = {}
+    if (inputs.name === '') {
+      errors.name = 'Enter your name'
+    }
+    else if (!namePattern.test(inputs.name)) {
+      errors.name = 'Name should be 3-16 characters, dont add any symbol or number'
+    }
+    const emailError = EmailValidation(inputs.email)
+    if (emailError) {
+      errors.email = emailError
+    }
+    const passwordError = PasswordValidation(inputs.password)
+    if (passwordError) {
+      errors.password = passwordError
+    }
+    const phoneError = NumberValidation(inputs.phone)
+    if (phoneError) {
+      errors.phone = phoneError
+    }
+    if (inputs.confirmpassword === '') {
+      errors.confirmpassword = 'Confirm Password is required'
+    } else if (inputs.password !== inputs.confirmpassword) {
+      errors.confirmpassword = 'Password is not matching'
+    }
+    setErrors(errors)
+    console.log(errors);
+    if (Object.keys(errors).length === 0) {
       await postData({
         body: {
           name: inputs.name, email: inputs.email, password: inputs.password, phone: inputs.phone
         },
       });
+    }
   }
 
   function signUpSuccess({ data = {} }) {
     const userId = data?.user?.id;
     if (userId) {
-        console.log(userId, 'from signup form');
-        navigate('/login');
+      console.log(userId, 'from signup form');
+      navigate('/login');
     } else {
-        console.error('User ID not found in response data');
-    }  
+      console.error('User ID not found in response data');
+    }
   }
 
   const handleChange = (event) => {

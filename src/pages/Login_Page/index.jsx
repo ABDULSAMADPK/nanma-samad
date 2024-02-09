@@ -5,8 +5,9 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import './styles/login.css'
 import { Link, useNavigate } from 'react-router-dom';
-import Validation from '../../utils/validators/Validation';
 import usePostRequest from '../../hook/api/usePostRequest';
+import EmailValidation from '../../utils/validators/EmailValidation';
+import PasswordValidation from '../../utils/validators/PasswordValidation';
 
 function LogInPage() {
     const [inputs, setInputs] = useState({
@@ -21,7 +22,7 @@ function LogInPage() {
     const [visible, setVisible] = useState(true)
 
 
-    const {  postData, loading: postLoading, error: postError } = usePostRequest({url: "https://portal.umall.in/api/customer/login",successCB:loginSuccess})
+    const { postData, loading: postLoading, error: postError } = usePostRequest({ url: "https://portal.umall.in/api/customer/login", successCB: loginSuccess })
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -30,8 +31,20 @@ function LogInPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        setErrors(Validation(inputs))
-        await postData({body: {emailormobile:inputs.email,password:inputs.password}})
+        const errors = {}
+        const emailError = EmailValidation(inputs.email)
+        if (emailError) {
+            errors.email = emailError
+        }
+        const passwordError = PasswordValidation(inputs.password)
+        if (passwordError) {
+            errors.password = passwordError
+        }
+        setErrors(errors)
+        console.log(errors);
+        if (Object.keys(errors).length === 0) {
+            await postData({ body: { emailormobile: inputs.email, password: inputs.password } })
+        }
     }
 
     if (postLoading) {
@@ -41,10 +54,10 @@ function LogInPage() {
     if (postError) {
         <p>Error: {postError}</p>
     }
-    function loginSuccess({ data = { } }) {
-        console.log(data?.user,'from login form')
+    function loginSuccess({ data = {} }) {
+        console.log(data?.user, 'from login form')
         navigate('/')
-      }
+    }
 
     const classNamebtn = 'btn bg-blue-900 text-white mt-6 text-lg py-2 px-4 w-full rounded-3xl'
     const classNameinput = 'bg-stone-200 rounded-md focus:outline-none py-2 px-3 mt-1 w-full'

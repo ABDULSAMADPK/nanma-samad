@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Input from '../../components/UI/Input'
 import Button from '../../components/UI/Button'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import Validation from '../../utils/validators/Validation'
 import { useNavigate } from 'react-router-dom'
+import NumberValidation from '../../utils/validators/NumberValidation'
 
 function ResetPasswordPage() {
 
@@ -20,12 +20,37 @@ function ResetPasswordPage() {
     }
 
     const navigate = useNavigate()
-    const [errors,setErrors] =useState([])
+    const [errors,setErrors] =useState({})
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setErrors(Validation(inputs))
-        if(Object.keys(errors).length===2){
+        const otpPattern = /^[0-9]{4,6}$/;
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        const errors = {}
+        const phoneError = NumberValidation(inputs.phone)
+        if (phoneError) {
+          errors.phone = phoneError
+        }
+        if (inputs.otp === '') {
+            errors.otp = 'Please enter your OTP'
+        } else if (!otpPattern.test(inputs.otp)) {
+            errors.otp = 'Please enter 4-6 digit OTP'
+        }
+        if (inputs.resetpassword === '') {
+            errors.resetpassword = 'Enter your reset password'
+        } else if (!passwordPattern.test(inputs.resetpassword)) {
+            errors.resetpassword = 'Password must have minimum 8 characters, 1 symbol, 1 letter and 1 number'
+        }
+    
+        if (inputs.confirmresetpassword === '') {
+            errors.confirmresetpassword = 'Confirm Password is required'
+        } else if (inputs.resetpassword !== inputs.confirmresetpassword) {
+            errors.confirmresetpassword = 'Password is not matching'
+        }
+    
+        setErrors(errors)
+
+        if(Object.keys(errors).length===0){
             navigate('/login')
         }
     }
@@ -45,18 +70,18 @@ function ResetPasswordPage() {
                     </div>
                     <form className='mx-auto w-[80%]' onSubmit={handleSubmit}>
                         <div className='mt-8'>
-                            <Input className={className} name='number' type='number' value={inputs.phone} onChange={handleChange} placeholder='Mobile Number' />
+                            <Input className={className} name='phone' type='number' placeholder='Mobile Number' value={inputs.phone} onChange={handleChange} />
                             {errors.phone && <span>{errors.phone}</span>}
                         </div>
                         <div className='flex justify-end'>
                             <Button className='btn bg-blue-900 text-white my-3 text-lg py-2 px-4 rounded-xl disabled' label='Get OTP' />
                         </div>
                         <div className=''>
-                            <Input className={className} name='otp' type='text' value={inputs.otp} onChange={handleChange} placeholder='Enter OTP' />
+                            <Input className={className} name='otp' type='text' placeholder='Enter OTP' value={inputs.otp} onChange={handleChange} />
                             {errors.otp && <span>{errors.otp}</span>}
                         </div>
                         <div className='relative mt-3'>
-                            <Input className={className} name='resetpassword' type={visible?'password':'text'} value={inputs.resetpassword} onChange={handleChange} placeholder='Reset Password' />
+                            <Input className={className} name='resetpassword' type={visible?'password':'text'} placeholder='Reset Password' value={inputs.resetpassword} onChange={handleChange} />
                             {visible ? <AiOutlineEyeInvisible onClick={() => { setVisible(!visible) }} className='absolute right-2 top-3 h-6 w-6 pr-2 cursor-pointer' /> : <AiOutlineEye onClick={() => { setVisible(!visible) }} className='absolute right-2 top-3 h-6 w-6 pr-2 cursor-pointer' />}
                             {errors.resetpassword && <span>{errors.resetpassword}</span>}
                         </div>
