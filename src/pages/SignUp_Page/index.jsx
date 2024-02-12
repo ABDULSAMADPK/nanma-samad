@@ -72,12 +72,13 @@ function SignUpPage() {
   }
 
   function signUpSuccess({ data = {} }) {
-    const userId = data?.user?.id;
-    if (userId) {
-      console.log(userId, 'from signup form');
+    const registerData = data
+    console.log(registerData,'register');
+    if (registerData.user.id) {
+      alert(`Registration ${registerData.msg}`)
       navigate('/login');
     } else {
-      console.error('User ID not found in response data');
+      alert('User ID not found in response data');
     }
   }
 

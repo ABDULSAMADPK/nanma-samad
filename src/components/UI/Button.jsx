@@ -1,11 +1,11 @@
 import React from 'react'
 import '../styles/style.css'
 
-const Button = ({className, label }) => {
+const Button = ({className, label, click }) => {
   
   return (
     <div>
-      <button className={className}>{label}</button>
+      <button onClick={click} className={className}>{label}</button>
     </div>
   )
 }

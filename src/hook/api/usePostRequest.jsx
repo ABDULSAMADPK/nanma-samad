@@ -11,11 +11,11 @@ function usePostRequest({url='',successCB = () => { }}) {
             const response = await axios.post(url, body)
             const result = await response.data
             console.log(result)
+            setData(result)
             if(result.sts === '00'){
-                alert('Enter your correct details')
+                alert(result.msg)
             }
             if(result.sts === '01'){
-                alert(result.msg)
                 successCB({data:result})
             }
         } catch (error) {

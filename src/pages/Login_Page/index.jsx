@@ -55,7 +55,9 @@ function LogInPage() {
         <p>Error: {postError}</p>
     }
     function loginSuccess({ data = {} }) {
-        console.log(data?.user, 'from login form')
+        const loginData = data
+        console.log(loginData,'login');
+        alert(`Login ${loginData.msg}`);
         navigate('/')
     }
 
