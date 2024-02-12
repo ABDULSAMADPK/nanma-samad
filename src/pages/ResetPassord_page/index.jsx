@@ -17,8 +17,8 @@ function ResetPasswordPage() {
 
     const [responseData,setResponseData] = useState({})
 
-    const { postData: otpData, loading: postLoading, error: postError } = usePostRequest({ url: "https://portal.umall.in/api/check-mobile", successCB: otpSuccess })
-    const { postData: resetData, loading, error } = usePostRequest({ url: "https://portal.umall.in/api/reset-password",successCB: resetSuccess })
+    const { postData: otpData } = usePostRequest({ url: "https://portal.umall.in/api/check-mobile", successCB: otpSuccess })
+    const { postData: resetData } = usePostRequest({ url: "https://portal.umall.in/api/reset-password",successCB: resetSuccess })
 
 
     const handleChange = (e) => {
@@ -78,6 +78,8 @@ function ResetPasswordPage() {
         const passwordData = data
         console.log(responseData,'reset');
         console.log(passwordData,'password');
+        console.log(typeof(responseData.otp));
+        console.log(typeof(inputs.otp));
         if(responseData.otp == inputs.otp ){
             alert(passwordData.msg)
             navigate('/login')
