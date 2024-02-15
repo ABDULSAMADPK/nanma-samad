@@ -1,7 +1,7 @@
 import React from 'react'
 import { HiOutlineArrowRight } from "react-icons/hi2";
-import logo from '../images/logo.png'
-import iphone from '../images/iphone.jpg'
+import logo from '../../images/logo.png'
+import iphone from '../../images/iphone.jpg'
 
 function Carousel() {
   return (
