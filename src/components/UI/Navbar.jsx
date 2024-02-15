@@ -29,7 +29,7 @@ function Navbar() {
                         </li>
                     </ul>
                 </div>
-                <div className='relative'>
+                <div className='relative hidden sm:block'>
                     <Input className='bg-stone-200 rounded-md focus:outline-none py-2 px-4 w-72' placeholder='What are you looking for?' />
                     <CiSearch className='absolute right-2 top-2 h-6 w-6 cursor-pointer' />
                 </div>
@@ -38,6 +38,10 @@ function Navbar() {
                     <IoCartOutline className='text-2xl cursor-pointer' />
                 </div>
             </nav>
+            <div className='relative sm:hidden w-[90%] mx-auto mt-3'>
+                    <Input className='bg-stone-200 rounded-md focus:outline-none py-2 px-4 w-full' placeholder='What are you looking for?' />
+                    <CiSearch className='absolute right-2 top-2 h-6 w-6 cursor-pointer' />
+                </div>
 
         </div>
     )
