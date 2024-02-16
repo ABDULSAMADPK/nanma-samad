@@ -16,16 +16,16 @@ function Category() {
       </div>
       <div>
         <div className='flex items-center justify-between mx-auto w-[90%] mt-3'>
-          <CategoryCard label='Hoodies' />
-          <CategoryCard label='Hoodies' />
-          <CategoryCard label='Hoodies' />
-          <CategoryCard label='Hoodies' />
-          <CategoryCard label='Hoodies' className='hidden sm:block' />
-          <CategoryCard label='Hoodies' className='hidden md:block' />
-          <CategoryCard label='Hoodies' className='hidden lg:block' />
-          <CategoryCard label='Hoodies' className='hidden lg:block' />
-          <CategoryCard label='Hoodies' className='hidden xl:block' />
-          <CategoryCard label='Hoodies' className='hidden xl:block' />
+          <CategoryCard label='Shoes' />
+          <CategoryCard label='Shoes' />
+          <CategoryCard label='Shoes' />
+          <CategoryCard label='Shoes' />
+          <CategoryCard label='Shoes' className='hidden sm:block' />
+          <CategoryCard label='Shoes' className='hidden md:block' />
+          <CategoryCard label='Shoes' className='hidden lg:block' />
+          <CategoryCard label='Shoes' className='hidden lg:block' />
+          <CategoryCard label='Shoes' className='hidden xl:block' />
+          <CategoryCard label='Shoes' className='hidden xl:block' />
         </div>
       </div>
     </div>
