@@ -2,6 +2,9 @@ import React from 'react'
 import Input from './Input'
 import { LuSendHorizonal } from "react-icons/lu";
 import { RiFacebookLine, RiInstagramLine, RiLinkedinLine, RiTwitterLine } from 'react-icons/ri';
+import  app from '../images/app.png'
+import  play from '../images/play.png'
+import  Qr from '../images/Qr.png'
 
 function Footer() {
     return (
@@ -40,13 +43,13 @@ function Footer() {
                 <div className='text-white lg:w-[18%] md:w-[30%] w-[45%]'>
                     <h1 className='text-lg font-bold py-4'>Download App</h1>
                     <p className='pb-2 text-xs'>Save $3 with App New User Only</p>
-                    <div>
-                        <div>
-                            <img src="" alt="" />
+                    <div className='flex pb-3'>
+                        <div className='w-[35%] mr-3'>
+                            <img src={Qr} alt="" />
                         </div>
-                        <div>
-                            <img src="" alt="" />
-                            <img src="" alt="" />
+                        <div className='w-[55%]'>
+                            <img src={play} alt="" className='mb-3 rounded-sm'/>
+                            <img src={app} alt="" className='rounded-sm'/>
                         </div>
                     </div>
                     <div className='flex items-center text-2xl'>
