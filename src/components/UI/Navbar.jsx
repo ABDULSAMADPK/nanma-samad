@@ -4,6 +4,7 @@ import Input from './Input'
 import { CiSearch } from "react-icons/ci";
 import { IoCartOutline, IoPersonOutline } from "react-icons/io5";
 import { RiMenu2Line } from "react-icons/ri";
+import nanma from '../images/nanma.png';
 
 function Navbar() {
     return (
@@ -11,7 +12,7 @@ function Navbar() {
             <nav className='w-[90%] mx-auto flex items-center justify-between'>
                 <RiMenu2Line className='text-3xl cursor-pointer lg:hidden' />
                 <div className='hidden lg:block'>
-                    <Link to={'/'} className='text-lg font-bold'>Nanma</Link>
+                    <Link to={'/'}><img className='w-20' src={nanma} alt="" /></Link>
                 </div>
                 <div className='lg:static lg:min-h-fit absolute bg-white min-h-[40vh] left-0 top-[-100%] flex items-center lg:w-auto w-5/12 px-5'>
                     <ul className='flex lg:flex-row flex-col lg:items-center lg:mx-auto lg:gap-[4VW] gap-6'>
