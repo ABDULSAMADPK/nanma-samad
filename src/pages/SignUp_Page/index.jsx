@@ -9,7 +9,6 @@ import usePostRequest from '../../hook/api/usePostRequest';
 import EmailValidation from '../../utils/validators/EmailValidation';
 import NumberValidation from '../../utils/validators/NumberValidation';
 import PasswordValidation from '../../utils/validators/PasswordValidation';
-// import { routes } from '../../constants/routes'
 
 function SignUpPage() {
 
@@ -35,7 +34,7 @@ function SignUpPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const namePattern = /^[A-Za-z]{3,20}$/;
+    const namePattern = /^[A-Za-z\s]{3,}[\.]{0,1}[A-Za-z\s]{0,16}$/;
     const errors = {}
     if (inputs.name === '') {
       errors.name = 'Enter your name'

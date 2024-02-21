@@ -39,8 +39,8 @@ function Navbar() {
                 </div>
             </nav>
             <div className='relative sm:hidden w-[90%] mx-auto mt-3'>
-                    <Input className='bg-stone-200 rounded-md focus:outline-none py-2 px-4 w-full' placeholder='What are you looking for?' />
-                    <CiSearch className='absolute right-2 top-2 h-6 w-6 cursor-pointer' />
+                    <CiSearch className='absolute top-2 left-2 h-6 w-6 cursor-pointer' />
+                    <Input className='bg-stone-200 rounded-md focus:outline-none py-2 px-4 w-full pl-9' placeholder='What are you looking for?' />
                 </div>
 
         </div>
