@@ -19,17 +19,17 @@ function Navbar() {
                 </div>
                 <div className={`lg:static absolute bg-white left-0 text-center lg:w-auto w-full lg:pt-0 sm:pt-6 pt-16 lg:pb-0 pb-6 ${open ? 'top-12' : 'top-[-250px]'}`}>
                     <ul className='flex lg:flex-row flex-col lg:items-center lg:mx-auto lg:gap-[4VW] gap-6'>
-                        <li onClick={()=>setOpen(!open)} className=''>
-                            <Link to={'/'} className='text-blue-700 underline underline-offset-4'>Home</Link>
+                        <li className=''>
+                            <Link to={'/'} className='text-blue-700 underline underline-offset-4' onClick={()=>setOpen(!open)}>Home</Link>
                         </li>
-                        <li onClick={()=>setOpen(!open)} className=''>
-                            <Link to={'/'} className=''>Contact</Link>
+                        <li className=''>
+                            <Link to={'/'} className=''  onClick={()=>setOpen(!open)}>Contact</Link>
                         </li>
-                        <li onClick={()=>setOpen(!open)} className=''>
-                            <Link to={'/'} className=''>About</Link>
+                        <li className=''>
+                            <Link to={'/'} className=''  onClick={()=>setOpen(!open)}>About</Link>
                         </li>
-                        <li onClick={()=>setOpen(!open)} className=''>
-                            <Link to={'/Signup'} className=''>Sign Up</Link>
+                        <li className=''>
+                            <Link to={'/Signup'} className=''  onClick={()=>setOpen(!open)}>Sign Up</Link>
                         </li>
                     </ul>
                 </div>
