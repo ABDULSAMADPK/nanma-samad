@@ -27,8 +27,8 @@ function Contact_Us() {
                     </div>
                 </div>
                 <div className='flex mt-6 lg:mt-9 xl:mt-14'>
-                <Input className='bg-stone-100 rounded-md focus:outline-none py-2 px-3 mt-1 lg:w-72 md:w-96 sm:w-80' placeholder='Email'/>
-                <Button className='btn bg-blue-900 text-white mt-1 ml-2 py-2 px-6 rounded-3xl w-full' label='Subscribe' />
+                <Input className='bg-stone-100 rounded-md focus:outline-none py-2 px-3 mt-1 lg:w-72 md:w-96 sm:w-80 w-full' placeholder='Email'/>
+                <Button className='btn bg-blue-900 text-white mt-1 ml-2 py-2 px-6 rounded-3xl' label='Subscribe' />
                 </div>
             </div>
         </div>
