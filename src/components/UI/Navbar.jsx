@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Input from './Input'
 import { CiSearch } from "react-icons/ci";
 import { IoCartOutline, IoPersonOutline } from "react-icons/io5";
@@ -10,26 +10,42 @@ function Navbar() {
 
     const [open, setOpen] = useState(false)
 
+    const { pathname } = useLocation()
+    const subpage = pathname.split('/')?.[1]
+
+    const Linkness = (type = null) => {
+
+        let classes = 'text-blue-700 underline underline-offset-4'
+
+        if (type === subpage) {
+            classes;
+        }
+        else {
+            classes = '';
+        }
+        return classes
+    }
+
     return (
-        <div className='p-3 lg:border-b-2'>
+        <div className='py-3 lg:border-b-2'>
             <nav className='w-[92%] mx-auto flex items-center justify-between'>
-                <RiMenu2Line onClick={()=>setOpen(!open)} className={`text-3xl cursor-pointer lg:hidden `} />
+                <RiMenu2Line onClick={() => setOpen(!open)} className={`text-3xl cursor-pointer lg:hidden `} />
                 <div className='hidden lg:block'>
                     <Link to={'/'}><img className='w-20' src={nanma} alt="" /></Link>
                 </div>
                 <div className={`lg:static absolute bg-white left-0 text-center lg:w-auto w-full lg:pt-0 sm:pt-6 pt-16 lg:pb-0 pb-6 ${open ? 'top-12' : 'top-[-250px]'}`}>
                     <ul className='flex lg:flex-row flex-col lg:items-center lg:mx-auto lg:gap-[4VW] gap-6'>
                         <li className=''>
-                            <Link to={'/'} className='text-blue-700 underline underline-offset-4' onClick={()=>setOpen(!open)}>Home</Link>
+                            <Link to={'/'} className={Linkness('')} onClick={() => setOpen(!open)}>Home</Link>
                         </li>
                         <li className=''>
-                            <Link to={'/contact'} className=''  onClick={()=>setOpen(!open)}>Contact</Link>
+                            <Link to={'/contact'} className={Linkness('contact')} onClick={() => setOpen(!open)}>Contact</Link>
                         </li>
                         <li className=''>
-                            <Link to={'/about'} className=''  onClick={()=>setOpen(!open)}>About</Link>
+                            <Link to={'/about'} className={Linkness('about')} onClick={() => setOpen(!open)}>About</Link>
                         </li>
                         <li className=''>
-                            <Link to={'/Signup'} className=''  onClick={()=>setOpen(!open)}>Sign Up</Link>
+                            <Link to={'/Signup'} className='' onClick={() => setOpen(!open)}>Sign Up</Link>
                         </li>
                     </ul>
                 </div>

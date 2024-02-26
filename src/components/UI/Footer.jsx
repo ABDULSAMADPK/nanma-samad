@@ -9,7 +9,7 @@ import  Qr from '../images/Qr.png'
 function Footer() {
     return (
         <div className='bg-black pt-16 mt-4 mx-auto'>
-            <div className='w-[90%] mx-auto justify-between flex flex-wrap'>
+            <div className='w-[92%] mx-auto justify-between flex flex-wrap'>
                 <div className='text-white lg:w-[18%] w-[45%] md:w-[30%]'>
                     <h1 className='text-lg font-bold py-4'>Exclusive</h1>
                     <p className='pb-2'>Subscribe</p>
