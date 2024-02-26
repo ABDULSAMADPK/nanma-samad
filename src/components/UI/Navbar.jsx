@@ -12,7 +12,7 @@ function Navbar() {
 
     return (
         <div className='p-3 lg:border-b-2'>
-            <nav className='w-[90%] mx-auto flex items-center justify-between'>
+            <nav className='w-[92%] mx-auto flex items-center justify-between'>
                 <RiMenu2Line onClick={()=>setOpen(!open)} className={`text-3xl cursor-pointer lg:hidden `} />
                 <div className='hidden lg:block'>
                     <Link to={'/'}><img className='w-20' src={nanma} alt="" /></Link>
@@ -23,10 +23,10 @@ function Navbar() {
                             <Link to={'/'} className='text-blue-700 underline underline-offset-4' onClick={()=>setOpen(!open)}>Home</Link>
                         </li>
                         <li className=''>
-                            <Link to={'/'} className=''  onClick={()=>setOpen(!open)}>Contact</Link>
+                            <Link to={'/contact'} className=''  onClick={()=>setOpen(!open)}>Contact</Link>
                         </li>
                         <li className=''>
-                            <Link to={'/'} className=''  onClick={()=>setOpen(!open)}>About</Link>
+                            <Link to={'/about'} className=''  onClick={()=>setOpen(!open)}>About</Link>
                         </li>
                         <li className=''>
                             <Link to={'/Signup'} className=''  onClick={()=>setOpen(!open)}>Sign Up</Link>
@@ -42,7 +42,7 @@ function Navbar() {
                     <IoCartOutline className='text-2xl cursor-pointer' />
                 </div>
             </nav>
-            <div className='relative sm:hidden w-[90%] mx-auto mt-3'>
+            <div className='relative sm:hidden w-[92%] mx-auto mt-3'>
                 <CiSearch className='absolute top-2 left-2 h-6 w-6 cursor-pointer' />
                 <Input className='bg-stone-200 rounded-md focus:outline-none py-2 px-4 w-full pl-9' placeholder='What are you looking for?' />
             </div>
